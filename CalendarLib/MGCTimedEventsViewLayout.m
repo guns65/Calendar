@@ -245,7 +245,11 @@ static NSString* const EventCellsKey = @"EventCellsKey";
 	//NSLog(@"layoutAttributesForItemAtIndexPath %@", indexPath);
 	
 	NSArray *attribs = [[self layoutAttributesForSection:indexPath.section] objectForKey:EventCellsKey];
-	return [attribs objectAtIndex:indexPath.item];
+	if (attribs.count > indexPath.item) {
+        	return [attribs objectAtIndex:indexPath.item];
+   	}else if( attribs.count > 0 ){
+        	return [attribs objectAtIndex:attribs.count - 1];
+    	}
 }
 
 - (UICollectionViewLayoutAttributes*)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
